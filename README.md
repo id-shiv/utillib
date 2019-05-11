@@ -41,6 +41,10 @@ Value : Hyper Link
 
 ## general
 
+### print_dictionary
+
+Print dictionary as table
+
 ## environment
 
 ### get
@@ -49,7 +53,3 @@ Returns environment parameters as a dictionary
 
 1. Virtual environment path
 2. Python version
-
-### print_dictionary
-
-Print dictionary as table

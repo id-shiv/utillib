@@ -3,7 +3,11 @@ def main():
     runner.py
     Contains sample invokations of utility libraries
     """
-    print('{} exexcution complete'.format(__file__))
+    from general import print_dictionary
+    from environment import get
+    print_dictionary(get(), width=80, cell_outer_border= '==', cell_inner_border=':')
+
+    print('{} execution complete'.format(__file__))
 
 if __name__ == '__main__':
     main()

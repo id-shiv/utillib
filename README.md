@@ -36,7 +36,7 @@ Python libraries as general utilities.
 
       |____ logger
 
-      |____ generate_random_string
+      |____ get_random_string
 
       |____ get_timestamp_as_string
 
@@ -125,7 +125,7 @@ log message example entry :
 
 ---
 
-### **general/generate_random_string**
+### **general/get_random_string**
 
 Returns a random string of fixed length.
 

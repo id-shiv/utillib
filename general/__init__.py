@@ -49,7 +49,7 @@ def logger(log_file, log_level='DEBUG'):
                         level=level)
     return logging
 
-def generate_random_string(length=5):
+def get_random_string(length=5):
     """
     Returns a random string of fixed length 
     """

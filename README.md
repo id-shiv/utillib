@@ -32,6 +32,8 @@ Python libraries as general utilities.
 
       |____ print_dictionary
 
+      |____ logger
+
 ## Modules
 
 ---
@@ -100,5 +102,13 @@ Print dictionary as table
 `width` : specify width of the table. By default 80 is set.  
 `cell_outer_border` : specify cell outer border character. By default "--" is set.  
 `cell_inner_border` : specify cell inner border character. By default "|" is set.
+
+---
+
+### **general/logger**
+
+Returns logging handler to specified log file with specified log level.  
+log message example entry :  
+`[ERROR, 2019-05-12 18:27:04,867, runner.py, runner, main, line#12] test error.`
 
 ---

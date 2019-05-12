@@ -5,20 +5,29 @@ Python libraries as general utilities
 runner.py contains sample invokations of utility libraries
 
 browser
+
 |____ protocol
+
 |____ domain_name
+
 |____ start
+
 |____ stop
+
 |____ get_hyper_links
 
 general
+
 |____ print_dictionary
 
 environment
+
 |____ get
 
 data
+
 |____ string
+
       |____ substring
 
 ## browser\protocol

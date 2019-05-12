@@ -10,13 +10,13 @@ runner.py contains sample invokations of utility libraries
 
 returns communication protocol specified in the url
 
-e.g. : returns "https" if specified url is https://youtube.com
+e.g. : returns "https" if specified url is <https://youtube.com>
 
 ### domain_name
 
 returns domain name specified in the url
 
-e.g. : returns "youtube.com" if specified url is https://youtube.com
+e.g. : returns "youtube.com" if specified url is <https://youtube.com>
 
 ### start
 
@@ -53,3 +53,11 @@ Returns environment parameters as a dictionary
 
 1. Virtual environment path
 2. Python version
+
+## data
+
+### string
+
+### sub_string
+
+Retrieve substring of a string between specified start and end

@@ -54,9 +54,7 @@ Returns environment parameters as a dictionary
 1. Virtual environment path
 2. Python version
 
-## data
-
-### string
+## data \ string
 
 ### sub_string
 

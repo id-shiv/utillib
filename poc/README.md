@@ -5,11 +5,13 @@
 `pip install pipenv`  
 
 windows : `py -3 -m venv env`
+
 linux\mac : `python3 -m venv env`
 
 ## Activate environment
 
 linux\mac : `env/bin/activate`
+
 windows : `Env\scripts\activate`
 
 ## Save package list

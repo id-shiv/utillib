@@ -11,6 +11,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    from textblob import TextBlob
-    blob = TextBlob('test this horrible software')
-    print(blob.sentiment)

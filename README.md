@@ -6,29 +6,29 @@ runner.py contains sample invokations of utility libraries
 
 browser
 
-|____ protocol
+    |____ protocol
 
-|____ domain_name
+    |____ domain_name
 
-|____ start
+    |____ start
 
-|____ stop
+    |____ stop
 
-|____ get_hyper_links
+    |____ get_hyper_links
 
 general
 
-|____ print_dictionary
+    |____ print_dictionary
 
 environment
 
-|____ get
+    |____ get
 
 data
 
-|____ string
+    |____ string
 
-      |____ substring
+          |____ substring
 
 ## browser\protocol
 

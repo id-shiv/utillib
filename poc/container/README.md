@@ -1,8 +1,8 @@
-# Containers
+# Containers PoC
 
 ## Create container in VS Code
 
-* **Note : This is available only on VSCode - Insider.**__
+* **Note : This is available only in VSCode - Insider.**
 
 * Click `cmd + shift + p` (mac) or `ctrl + shift + p` (windows).
 

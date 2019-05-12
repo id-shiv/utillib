@@ -4,6 +4,6 @@
 
 * Default name of flask applications is `app.py`.
 
-* Navigate to application directory : `cd poc\flask`.
+* Navigate to application directory : `cd poc/flask`.
 
 * Run `flask run`.

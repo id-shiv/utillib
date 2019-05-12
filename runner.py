@@ -17,12 +17,27 @@ if __name__ == '__main__':
     main()
 
     import browser
+    from general import get_timestamp_as_string
 
     url = 'https://pythonspot.com'
     links = browser.get_hyper_links(url)
+
     for link_text, link in links.items():
-        print(link)
-        driver = browser.start(link, wait_seconds_after_launch=5)
-        browser.screen_shot(driver, 'sample.png')
-        browser.stop(driver)
-        break
+        if url in link and (len(link) - len(url) <= 1):
+            # Skip the base url 
+            continue
+        
+        try:
+            # launch the url
+            driver = browser.launch(url=link, wait_seconds_after_launch=5)
+
+            # Save the screen shot
+            screen_shot_file = 'temp/' + get_timestamp_as_string() + '.png'
+            browser.screen_shot(driver, screen_shot_file)
+
+            # Close the browser
+            browser.quit(driver)
+
+        # break
+        except BaseException as exception:
+            print('Exception {}'.format(exception))

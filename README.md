@@ -12,9 +12,9 @@ Python libraries as general utilities.
 
       |____ domain_name
 
-      |____ start
+      |____ launch
 
-      |____ stop
+      |____ quit
 
       |____ get_hyper_links  
 
@@ -36,6 +36,10 @@ Python libraries as general utilities.
 
       |____ logger
 
+      |____ generate_random_string
+
+      |____ get_timestamp_as_string
+
 ## Modules
 
 ---
@@ -55,7 +59,7 @@ e.g. : returns "youtube.com" if specified url is <https://youtube.com>.
 
 ---
 
-### **browser/start**
+### **browser/launch**
 
 1. Starts a browser session with specified url
 2. Launches the specified url page
@@ -64,7 +68,7 @@ e.g. : returns "youtube.com" if specified url is <https://youtube.com>.
 
 ---
 
-### **browser/stop**
+### **browser/quit**
 
 Stops the specified browser session
 
@@ -118,5 +122,17 @@ Print dictionary as table
 Returns logging handler to specified log file with specified log level.  
 log message example entry :  
 `[ERROR, 2019-05-12 18:27:04,867, runner.py, runner, main, line#12] test error.`
+
+---
+
+### **general/generate_random_string**
+
+Generate a random string of fixed length.
+
+---
+
+### **general/get_timestamp_as_string**
+
+Gets the current time and returns it as string.
 
 ---

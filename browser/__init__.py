@@ -32,7 +32,7 @@ def __sub_domain_name(url):
     except:
         return None
 
-def start(url, wait_seconds_after_launch=10):
+def launch(url=None, wait_seconds_after_launch=10):
     """
     1. Starts a browser session with specified url
     2. Launches the specified url page
@@ -42,8 +42,9 @@ def start(url, wait_seconds_after_launch=10):
     # start a new browser session
     browser_driver = webdriver.Safari()
 
-    # launch the url
-    browser_driver.get(url)
+    if url:
+        # launch the url
+        browser_driver.get(url)
 
     # maximize the browser window
     browser_driver.maximize_window()
@@ -54,12 +55,13 @@ def start(url, wait_seconds_after_launch=10):
     # return the web driver
     return browser_driver
 
-def stop(browser_driver):
+def quit(browser_driver):
     """
     Stops the specified browser session
     """
     # close the browser session
     browser_driver.close()
+    browser_driver.quit()
 
 def get_hyper_links(url):
     """

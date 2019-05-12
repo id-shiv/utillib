@@ -1,4 +1,7 @@
 import logging
+import random
+import string
+import datetime
 
 def print_dictionary(dictionary, width=80, cell_outer_border = '--', cell_inner_border = '|'):
     """
@@ -45,3 +48,20 @@ def logger(log_file, log_level='DEBUG'):
                             '%(module)s, %(funcName)s, line#%(lineno)s] %(message)s',
                         level=level)
     return logging
+
+def generate_random_string(length=5):
+    """
+    Generate a random string of fixed length 
+    """
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(length))
+
+def get_timestamp_as_string():
+    """
+    Gets the current time and returns it as string
+    """
+    current_time = datetime.datetime.now().isoformat()
+    chars_to_replace = ['.', '-', ':', ' ']
+    for character in chars_to_replace:
+        current_time = current_time.replace(character, '')
+    return current_time

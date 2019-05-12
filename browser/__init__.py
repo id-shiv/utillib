@@ -89,3 +89,9 @@ def get_hyper_links(url):
             text = text.strip()
             hyper_links[text] = 'No link'
     return hyper_links
+
+def screen_shot(browser_driver, output_file):
+    """
+    Saves screen shot of current browser state with specified output file name
+    """
+    browser_driver.save_screenshot(output_file)

@@ -18,6 +18,8 @@ Python libraries as general utilities.
 
       |____ get_hyper_links  
 
+      |____ screen_shot
+
 |____ `data`
 
       |____ string
@@ -77,6 +79,12 @@ Items in dictionary represent each hyper link with
 Key : Link text
 
 Value : Hyper Link
+
+---
+
+### **browser/screen_shot**
+
+Saves screen shot of current browser state with specified output file name
 
 ---
 

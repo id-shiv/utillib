@@ -127,7 +127,7 @@ log message example entry :
 
 ### **general/generate_random_string**
 
-Generate a random string of fixed length.
+Returns a random string of fixed length.
 
 ---
 

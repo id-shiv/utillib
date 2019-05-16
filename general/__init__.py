@@ -2,6 +2,7 @@ import logging
 import random
 import string
 import datetime
+import os
 
 def print_dictionary(dictionary, width=80, cell_outer_border = '--', cell_inner_border = '|'):
     """
@@ -65,3 +66,7 @@ def get_timestamp_as_string():
     for character in chars_to_replace:
         current_time = current_time.replace(character, '')
     return current_time
+
+def run_command(command):
+    """ Runs the specified command and returns the output """
+    return os.system(command)

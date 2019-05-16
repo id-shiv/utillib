@@ -11,33 +11,36 @@ def main():
     # log_handler = logger('sample.log')
     # log_handler.error("test error")
 
+    # import browser
+    # from general import get_timestamp_as_string
+
+    # url = 'https://pythonspot.com'
+    # links = browser.get_hyper_links(url)
+
+    # for link_text, link in links.items():
+    #     if url in link and (len(link) - len(url) <= 1):
+    #         # Skip the base url 
+    #         continue
+        
+    #     try:
+    #         # launch the url
+    #         driver = browser.launch(url=link, wait_seconds_after_launch=5)
+
+    #         # Save the screen shot
+    #         screen_shot_file = 'temp/' + get_timestamp_as_string() + '.png'
+    #         browser.screen_shot(driver, screen_shot_file)
+
+    #         # Close the browser
+    #         browser.quit(driver)
+
+    #     # break
+    #     except BaseException as exception:
+    #         print('Exception {}'.format(exception))
+
     print('{} execution complete'.format(__file__))
 
 if __name__ == '__main__':
+    from environment import install_packages, verify_installed_packages
+    install_packages('Requirements.txt')
+    verify_installed_packages('Requirements.txt')
     main()
-
-    import browser
-    from general import get_timestamp_as_string
-
-    url = 'https://pythonspot.com'
-    links = browser.get_hyper_links(url)
-
-    for link_text, link in links.items():
-        if url in link and (len(link) - len(url) <= 1):
-            # Skip the base url 
-            continue
-        
-        try:
-            # launch the url
-            driver = browser.launch(url=link, wait_seconds_after_launch=5)
-
-            # Save the screen shot
-            screen_shot_file = 'temp/' + get_timestamp_as_string() + '.png'
-            browser.screen_shot(driver, screen_shot_file)
-
-            # Close the browser
-            browser.quit(driver)
-
-        # break
-        except BaseException as exception:
-            print('Exception {}'.format(exception))

@@ -4,9 +4,9 @@ Python libraries as general utilities.
 
 `runner.py` contains sample invokations of utility libraries.
 
-`utillib`
+`utillib` | __library package__
 
-|____ `browser`
+|____ `browser` | __modules for web page automation__
 
       |____ protocol
 
@@ -20,17 +20,21 @@ Python libraries as general utilities.
 
       |____ screen_shot
 
-|____ `data`
+|____ `data_structure` | __modules for data processing__
 
       |____ string
 
             |____ substring
 
-|____ `environment`
+|____ `environment` | __modules for python execution environment__
 
       |____ get
 
-|____ `general`
+      |____ install_packages
+
+      |____ verify_installed_packages
+
+|____ `general` | __miscellaneous modules__
 
       |____ print_dictionary
 
@@ -39,6 +43,10 @@ Python libraries as general utilities.
       |____ get_random_string
 
       |____ get_timestamp_as_string
+
+      |____ run_command
+
+|____ `text` | __modules for text and natural language processing__
 
 ## Modules
 
@@ -107,6 +115,18 @@ Returns environment parameters as a dictionary
 
 ---
 
+### **environment/install_packages**
+
+Gets the current time and returns it as string
+
+---
+
+### **environment/verify_installed_packages**
+
+Verify if packages specified in Requirements.txt is installed
+
+---
+
 ### **general/print_dictionary**
 
 Print dictionary as table
@@ -134,5 +154,11 @@ Returns a random string of fixed length.
 ### **general/get_timestamp_as_string**
 
 Gets the current time and returns it as string.
+
+---
+
+### **general/run_command**
+
+Runs the specified command and returns the output 
 
 ---

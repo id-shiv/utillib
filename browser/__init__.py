@@ -4,12 +4,14 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 
+
 def protocol(url):
     """
     returns communication protocol specified in the url
     e.g. : returns "https" if specified url is https://youtube.com
     """
     return url.split('://')[0]
+
 
 def domain_name(url):
     """
@@ -22,6 +24,7 @@ def domain_name(url):
     except:
         return None
 
+
 def __sub_domain_name(url):
     """
     returns network path specified in the url
@@ -31,6 +34,7 @@ def __sub_domain_name(url):
         return urlparse(url).netloc
     except:
         return None
+
 
 def launch(url=None, wait_seconds_after_launch=10):
     """
@@ -55,6 +59,7 @@ def launch(url=None, wait_seconds_after_launch=10):
     # return the web driver
     return browser_driver
 
+
 def quit(browser_driver):
     """
     Stops the specified browser session
@@ -62,6 +67,7 @@ def quit(browser_driver):
     # close the browser session
     browser_driver.close()
     browser_driver.quit()
+
 
 def get_hyper_links(url):
     """
@@ -91,6 +97,7 @@ def get_hyper_links(url):
             text = text.strip()
             hyper_links[text] = 'No link'
     return hyper_links
+
 
 def screen_shot(browser_driver, output_file):
     """

@@ -2,6 +2,8 @@ import os
 import random
 import json
 
+from googlesearch import search
+
 import nltk
 from nltk.stem.lancaster import LancasterStemmer
 import numpy
@@ -148,11 +150,33 @@ def __respond(model, question, words, labels, intents):
 
 
 def __display_bot_response(response):
+    print("\n")
     screen_width = 150
+    sentence_length = len(BOT_NAME)
+    space_length = screen_width - sentence_length
+    print(' '*space_length + "-"*sentence_length)
+    print(' '*(space_length - 2) + '| {} |'.format(BOT_NAME))
+    print(' '*space_length + "-"*sentence_length)
+
     for sentence in response.split('\n'):
         sentence_length = len(sentence)
         space_length = screen_width - sentence_length
         print(' '*space_length + sentence)
+    print("\n")
+
+
+def __get_user_input():
+    sentence_length = len(USER_NAME)
+    print(' '*2 + "-"*sentence_length)
+    print('| {} |'.format(USER_NAME))
+    print(' '*2 + "-"*sentence_length)
+    user_input = input()
+    return user_input
+
+
+def __return_top_link_from_google(search_word):
+    for link in search(search_word, tld="co.in", num=10, stop=1, pause=2): 
+        return link
 
 
 def start():
@@ -172,31 +196,38 @@ def start():
 
     response = '1'
     while response == '1':
-        question = input()
+        question = __get_user_input()
         bot_response = __respond(model, question, words, labels, intents)
-        __display_bot_response(bot_response)
+
+        has_action = False
         for response, action in __load_bot_actions().items():
             if bot_response == response:
-                __display_bot_response('1. Yes')
-                __display_bot_response('2. No')
-                perform_action = input()
+                has_action = True
+                message = bot_response + '\n1. Yes\n2. No'
+                __display_bot_response(message)
+                perform_action = __get_user_input()
                 if perform_action.lower() == 'yes' or perform_action == '1':
-                    __display_bot_response('Performing {}'.format(action))
-        
-        print("\n")
-        __display_bot_response('Need help?')
-        __display_bot_response('1. Yes')
-        __display_bot_response('2. Share feedback?')
-        __display_bot_response('Enter anything else to close the chat')
-        response = input()
-        if response == '1' or response.lower() == 'yes':
+                    __display_bot_response('I am performing required actions, please wait ...')
+                    if action == 'google':
+                        top_link = __return_top_link_from_google(question)
+                        __display_bot_response('Ok! so this is what i found: {}'.format(top_link))
+
+        if not has_action:
+            __display_bot_response(bot_response)
+        else:
+            has_action = False
+
+        message = '1. Continue\n2. Share feedback?\nEnter anything else to close the chat'
+        __display_bot_response(message)
+        response = __get_user_input()
+        if response == '1':
             __display_bot_response('Sure, what is it?')
-            if response not in ['1', '2', '3']:
-                __display_bot_response('You did not choose from the options')
+        if response not in ['1', '2', '3']:
+            __display_bot_response('You did not choose from the options')
 
     if response == '2':
         __display_bot_response('Type in your feedback here')
-        feedback = input()
+        feedback = __get_user_input()
         __display_bot_response('Thank you {} for your feedback, have a great day'.format(USER_NAME))
     else:
         __display_bot_response('Alright {}, have a great day'.format(USER_NAME))

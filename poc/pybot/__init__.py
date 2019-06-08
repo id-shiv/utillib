@@ -11,7 +11,7 @@ import pickle
 
 import warnings
 warnings.simplefilter("ignore")
-    
+
 TEMP_DIRECTORY = 'temp/'
 BOT_NAME = 'PyBot'
 DATA_SET_FOLDER = 'poc/pybot/knowledge/'

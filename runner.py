@@ -87,5 +87,12 @@ def web_crawl():
 if __name__ == '__main__':
     # webcrawl_and_take_screen_shot()
     # ml_with_scikit_learn()
-    web_crawl()
-    main()
+    # web_crawl()
+
+    # import poc.chat_bot as chat_bot
+    # chat_bot.main()
+
+    import poc.pybot as pybot
+    pybot.start()
+    
+    # main()

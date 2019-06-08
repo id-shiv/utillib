@@ -1,0 +1,21 @@
+{
+    "intents" : [
+        {
+            "tag": "greeting",
+            "patterns": ["Hi"],
+            "responses": ["Hello", "Hi", "Welcome", "Greetings", "Hey"],
+            "context_set": ""
+        },
+        {
+            "tag": "product",
+            "patterns": ["Tell me about", "What is the"],
+            "responses": [
+                "Sendings related links", 
+                "Here is a document", 
+                "Here is a contact", 
+                "This contact person must know about it", 
+                "Did you google before you got here?"],
+            "context_set": ""
+        }
+    ]
+}

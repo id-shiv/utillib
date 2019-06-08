@@ -1,20 +1,22 @@
 {
     "intents" : [
         {
-            "tag": "greeting",
-            "patterns": ["Hi"],
-            "responses": ["Hello", "Hi", "Welcome", "Greetings", "Hey"],
-            "context_set": ""
-        },
-        {
             "tag": "product",
             "patterns": ["Tell me about", "What is the"],
             "responses": [
                 "Sendings related links", 
                 "Here is a document", 
                 "Here is a contact", 
-                "This contact person must know about it", 
-                "Did you google before you got here?"],
+                "This contact person must know about it"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "google",
+            "patterns": ["Idea", "about", "iot"],
+            "responses": [
+                "Hmmm ... Not sure of it.\nShould i google this for you?", 
+                "No idea about that, would you want me search for this online?"],
             "context_set": ""
         }
     ]

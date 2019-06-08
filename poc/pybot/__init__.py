@@ -16,6 +16,7 @@ TEMP_DIRECTORY = 'temp/'
 BOT_NAME = 'PyBot'
 DATA_SET_FOLDER = 'poc/pybot/knowledge/'
 INTENTS_FILE = '__intent_knowledge.json'
+BOT_ACTIONS_FILE = 'bot_actions.json'
 USER_NAME = os.getlogin()
 RE_TRAIN = False
 
@@ -80,6 +81,12 @@ def __load_intents(data_set_folder, intents_file):
     return words, labels, training, output, data
 
 
+def __load_bot_actions():
+    with open(DATA_SET_FOLDER + BOT_ACTIONS_FILE) as file:
+        bot_actions = json.load(file)
+    return bot_actions
+
+
 def __create_model(training, output):
     tensorflow.reset_default_graph()
 
@@ -141,10 +148,11 @@ def __respond(model, question, words, labels, intents):
 
 
 def __display_bot_response(response):
-    screen_width = 100
-    response_length = len(response)
-    space_length = screen_width - response_length
-    print(' '*space_length + response)
+    screen_width = 150
+    for sentence in response.split('\n'):
+        sentence_length = len(sentence)
+        space_length = screen_width - sentence_length
+        print(' '*space_length + sentence)
 
 
 def start():
@@ -157,7 +165,7 @@ def start():
     else:
         model, words, labels, intents = __load_model()
     print('Knowledge base loaded, {} is now ready to converse'.format(BOT_NAME))
-    
+
     print('\n\n')
     message = 'Hello {}, How may i help you'.format(USER_NAME)
     __display_bot_response(message)
@@ -165,19 +173,28 @@ def start():
     response = '1'
     while response == '1':
         question = input()
-        __display_bot_response(__respond(model, question, words, labels, intents))
+        bot_response = __respond(model, question, words, labels, intents)
+        __display_bot_response(bot_response)
+        for response, action in __load_bot_actions().items():
+            if bot_response == response:
+                __display_bot_response('1. Yes')
+                __display_bot_response('2. No')
+                perform_action = input()
+                if perform_action.lower() == 'yes' or perform_action == '1':
+                    __display_bot_response('Performing {}'.format(action))
+        
         print("\n")
         __display_bot_response('Need help?')
         __display_bot_response('1. Yes')
         __display_bot_response('2. Share feedback?')
         __display_bot_response('Enter anything else to close the chat')
         response = input()
-        if response == '1':
+        if response == '1' or response.lower() == 'yes':
             __display_bot_response('Sure, what is it?')
             if response not in ['1', '2', '3']:
                 __display_bot_response('You did not choose from the options')
-    
-    if response == '3':
+
+    if response == '2':
         __display_bot_response('Type in your feedback here')
         feedback = input()
         __display_bot_response('Thank you {} for your feedback, have a great day'.format(USER_NAME))

@@ -1,22 +1,45 @@
 {
     "intents" : [
         {
-            "tag": "product",
-            "patterns": ["Tell me about", "What is the"],
-            "responses": [
-                "Sendings related links", 
-                "Here is a document", 
-                "Here is a contact", 
-                "This contact person must know about it"
-            ],
+            "tag": "automation",
+            "patterns": ["axon", "automation", "framework"],
+            "responses": ["Here are the automated related links"],
             "context_set": ""
         },
         {
-            "tag": "google",
-            "patterns": ["Idea", "about", "iot"],
-            "responses": [
-                "Hmmm ... Not sure of it.\nShould i google this for you?", 
-                "No idea about that, would you want me search for this online?"],
+            "tag": "metrics",
+            "patterns": ["metrics", "axon", "automation", "confluence"],
+            "responses": ["Here are the metrics links from confluence"],
+            "context_set": ""
+        },
+        {
+            "tag": "contact",
+            "patterns": ["contact", "know", "who", "person", "spoc"],
+            "responses": ["Here is the contact information"],
+            "context_set": ""
+        },
+        {
+            "tag": "audit",
+            "patterns": ["audit, checklist", "process", "criteria", "entry"],
+            "responses": ["Here is the link to entry/exit criteria"],
+            "context_set": ""
+        },
+        {
+            "tag": "server",
+            "patterns": ["poweredge", "dell", "emc", "server"],
+            "responses": ["Here is the information on servers"],
+            "context_set": ""
+        },
+        {
+            "tag": "newbie",
+            "patterns": ["newbie", "onboard", "new to", "fresh", "joinee", "joined"],
+            "responses": ["Here are the links to documents on project onboarding"],
+            "context_set": ""
+        },
+        {
+            "tag": "tools",
+            "patterns": ["code", "development", "svn", "tools", "confluence"],
+            "responses": ["Here are the links to information on development tools"],
             "context_set": ""
         }
     ]

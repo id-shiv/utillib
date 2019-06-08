@@ -14,13 +14,14 @@ import pickle
 import warnings
 warnings.simplefilter("ignore")
 
-TEMP_DIRECTORY = 'temp/'
+TEMP_DIRECTORY = 'poc/pybot/knowledge/'  # this directory is used to dump model and data
 BOT_NAME = 'PyBot'
 DATA_SET_FOLDER = 'poc/pybot/knowledge/'
 INTENTS_FILE = '__intent_knowledge.json'
 BOT_ACTIONS_FILE = 'bot_actions.json'
 USER_NAME = os.getlogin()
-RE_TRAIN = False
+RE_TRAIN = True
+RESPONSE_PROBABILITY = 0.6
 
 
 def __load_intents(data_set_folder, intents_file):
@@ -138,15 +139,18 @@ def __bag_of_words(s, words):
 
 
 def __respond(model, question, words, labels, intents):
-    results = model.predict([__bag_of_words(question, words)])
+    results = model.predict([__bag_of_words(question, words)])[0]
     results_index = numpy.argmax(results)
     tag = labels[results_index]
 
-    for tg in intents["intents"]:
-        if tg['tag'] == tag:
-            responses = tg['responses']
-
-    return random.choice(responses)
+    print(results, results[results_index], results_index, tag)
+    if results[results_index] > RESPONSE_PROBABILITY:
+        for tg in intents["intents"]:
+            if tg['tag'] == tag:
+                responses = tg['responses']
+        return random.choice(responses)
+    else:
+        return 'Hmmm ... Not sure of it.\nShould i google this for you?'
 
 
 def __display_bot_response(response):

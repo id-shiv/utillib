@@ -21,7 +21,7 @@ INTENTS_FILE = '__intent_knowledge.json'
 BOT_ACTIONS_FILE = 'bot_actions.json'
 USER_NAME = os.getlogin()
 RE_TRAIN = True
-RESPONSE_PROBABILITY = 0.6
+RESPONSE_PROBABILITY = 0.49
 
 
 def __load_intents(data_set_folder, intents_file):

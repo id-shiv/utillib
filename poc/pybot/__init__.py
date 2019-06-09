@@ -17,11 +17,11 @@ warnings.simplefilter("ignore")
 TEMP_DIRECTORY = 'poc/pybot/knowledge/'  # this directory is used to dump model and data
 BOT_NAME = 'PyBot'
 DATA_SET_FOLDER = 'poc/pybot/knowledge/'
-INTENTS_FILE = '__intent_knowledge.json'
+INTENTS_FILE = 'bot_profile.json'
 BOT_ACTIONS_FILE = 'bot_actions.json'
 USER_NAME = os.getlogin()
 RE_TRAIN = True
-RESPONSE_PROBABILITY = 0.49
+RESPONSE_PROBABILITY = 0.5
 
 
 def __load_intents(data_set_folder, intents_file):
@@ -50,9 +50,6 @@ def __load_intents(data_set_folder, intents_file):
 
     labels = sorted(labels)
 
-    print(docs_x)
-    print(docs_y)
-
     training = []
     output = []
 
@@ -80,7 +77,7 @@ def __load_intents(data_set_folder, intents_file):
 
     with open(TEMP_DIRECTORY + "data.pickle", "wb") as f:
         pickle.dump((words, labels, training, output), f)
-    
+
     return words, labels, training, output, data
 
 
@@ -198,10 +195,13 @@ def start():
     message = 'Hello {}, How may i help you'.format(USER_NAME)
     __display_bot_response(message)
 
-    response = '1'
-    while response == '1':
+    while True:
         question = __get_user_input()
         bot_response = __respond(model, question, words, labels, intents)
+
+        if bot_response.lower() == 'quit':
+            message = 'Would you like to share some feedback?'
+            break
 
         has_action = False
         for response, action in __load_bot_actions().items():
@@ -221,21 +221,7 @@ def start():
         else:
             has_action = False
 
-        message = '1. Continue\n2. Share feedback?\nEnter anything else to close the chat'
-        __display_bot_response(message)
-        response = __get_user_input()
-        if response == '1':
-            __display_bot_response('Sure, what is it?')
-        if response not in ['1', '2', '3']:
-            __display_bot_response('You did not choose from the options')
-
-    if response == '2':
-        __display_bot_response('Type in your feedback here')
-        feedback = __get_user_input()
-        __display_bot_response('Thank you {} for your feedback, have a great day'.format(USER_NAME))
-    else:
-        __display_bot_response('Alright {}, have a great day'.format(USER_NAME))
-    print('\n')
+    __display_bot_response('Alright {}, have a great day'.format(USER_NAME))
 
 
 start()

@@ -1,0 +1,14 @@
+{
+    "intents" : [
+        {
+            "tag": "name",
+            "patterns": ["name", "who are you", "what is your name"],
+            "responses": ["My name is Stark"]
+        },
+        {
+            "tag": "metrics",
+            "patterns": ["metrics", "axon", "automation", "confluence"],
+            "responses": ["Here are the metrics links from confluence"]
+        }
+    ]
+}

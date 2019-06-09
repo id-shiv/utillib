@@ -20,7 +20,7 @@
         },
         {
             "tag": "audit",
-            "patterns": ["audit, checklist", "process", "criteria", "entry"],
+            "patterns": ["audit", "checklist", "process", "criteria", "entry"],
             "responses": ["Here is the link to entry/exit criteria"],
             "context_set": ""
         },

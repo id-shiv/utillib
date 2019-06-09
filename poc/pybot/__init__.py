@@ -143,7 +143,7 @@ def __respond(model, question, words, labels, intents):
     results_index = numpy.argmax(results)
     tag = labels[results_index]
 
-    print(results, results[results_index], results_index, tag)
+    # print(results, results[results_index], results_index, tag)
     if results[results_index] > RESPONSE_PROBABILITY:
         for tg in intents["intents"]:
             if tg['tag'] == tag:

@@ -11,16 +11,19 @@
 * Create a web project
 `django-admin startproject djangopoc`
 
-* Collect all static files (css, js ...)
-`cd djangopoc`
-| `python3 manage.py collectstatic`
+## Collect all static files (css, js ...)
 
-* Start the web server
+* `cd djangopoc`
+* `python3 manage.py collectstatic`
+
+
+## Start the web server
+
 `python3 manage.py runserver`
 
 ## Launch the web page
 
-* click on the development server url in `runserver` output
+Click on the development server url in `runserver` output
 
 ## Create a web-site
 

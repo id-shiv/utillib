@@ -1,14 +1,44 @@
 {
     "intents" : [
         {
-            "tag": "name",
-            "patterns": ["name", "who are you", "what is your name"],
-            "responses": ["My name is Stark"]
+            "tag": "bot_name",
+            "patterns": [
+                "what is your name", 
+                "who are you", 
+                "do you have a name", 
+                "tell me your name"],
+            "responses": [
+                "My name is Stark",
+                "This is Stark"
+            ]
         },
         {
-            "tag": "metrics",
-            "patterns": ["metrics", "axon", "automation", "confluence"],
-            "responses": ["Here are the metrics links from confluence"]
+            "tag": "bot_age",
+            "patterns": [
+                "what is your age", 
+                "how old are you", 
+                "how young are you", 
+                "when were you born",
+                "tell me"
+            ],
+            "responses": [
+                "Well ... i am younger than you",
+                "I am up and running from july 2019",
+                "My admin could answer that"
+            ]
+        },
+        {
+            "tag": "bot_location",
+            "patterns": [
+                "where are you from", 
+                "where is your location", 
+                "where were you born", 
+                "what where is your birth place"
+            ],
+            "responses": [
+                "Oh! i am from 192.168.0.1, have you been here?",
+                "You'll probably get that answer from my admin"
+            ]
         }
     ]
 }

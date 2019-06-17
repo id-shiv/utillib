@@ -49,14 +49,14 @@ def get_project_model(task_profile):
             return task["RESPONSE"]
 
 
-def check_notifications():
-    current_date = datetime.now().date()
-    print('Current date is {}'.format(current_date))
+def trigger_notification(task):
+    current_date = datetime.now()
+    trigger_date = datetime.strptime(task["TRIGGER DATE"], '%Y-%m-%d')
+
+    # print('{} vs {}'.format(trigger_date, current_date))
+    if trigger_date <= current_date and task["STATUS"] == "NOT TRIGGERED":
+        return True
     return False
-
-
-def notify():
-    pass
 
 
 def get_task_actions():
@@ -126,53 +126,70 @@ def create_task_list(task_parameters):
         for tasks_updated_profile in task_parameters:
             if tasks_updated_profile["PARAMETER"] == task["PROFILE PARAMTER"]:
                 task_details["TASK DATE"] = General_Modules.pad_date_with_zero(tasks_updated_profile["RESPONSE"])
-        if task["NOTIFY"] == "2_WEEKS_BEFORE":
-            date_2_weeks_before = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d') - timedelta(days=14)
-            task_details["TRIGGER DATE"] = General_Modules.pad_date_with_zero(str(date_2_weeks_before).split(" ")[0])
-        if task["REMINDER"]:
-            if task["REMINDER"] == 'EVERY_WEEK':
-                reminder_date = datetime.strptime(task_details["TRIGGER DATE"], '%Y-%m-%d')
-                task_date = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d')
-                while reminder_date < task_date:
-                    reminder_date = reminder_date + timedelta(days=7)
-                    sub_task_details = {}
-                    sub_task_details["NAME"] = task["NAME"]
-                    sub_task_details["TYPE"] = "REMINDER"
-                    sub_task_details["TASK DATE"] = task_details["TASK DATE"]
-                    sub_task_details["TRIGGER DATE"] = str(reminder_date).split(" ")[0]
-                    task_list.append(sub_task_details)
-
-        task_list.append(task_details)
+                if task["NOTIFY"] == "2_WEEKS_BEFORE":
+                    date_2_weeks_before = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d') - timedelta(days=14)
+                    task_details["TRIGGER DATE"] = General_Modules.pad_date_with_zero(str(date_2_weeks_before).split(" ")[0])
+                elif task["NOTIFY"] == "1_WEEK_BEFORE":
+                    date_1_week_before = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d') - timedelta(days=7)
+                    task_details["TRIGGER DATE"] = General_Modules.pad_date_with_zero(str(date_1_week_before).split(" ")[0])
+                if task["REMINDER"]:
+                    if task["REMINDER"] == 'EVERY_WEEK':
+                        reminder_date = datetime.strptime(task_details["TRIGGER DATE"], '%Y-%m-%d')
+                        task_date = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d')
+                        while reminder_date < task_date:
+                            reminder_date = reminder_date + timedelta(days=7)
+                            sub_task_details = {}
+                            sub_task_details["NAME"] = task["NAME"]
+                            sub_task_details["TYPE"] = "REMINDER"
+                            sub_task_details["TASK DATE"] = task_details["TASK DATE"]
+                            sub_task_details["TRIGGER DATE"] = str(reminder_date).split(" ")[0]
+                            sub_task_details["STATUS"] = "NOT TRIGGERED"
+                            task_list.append(sub_task_details)
+        
+                task_details["STATUS"] = "NOT TRIGGERED"
+                task_list.append(task_details)
+                break
 
     task_list = [i for n, i in enumerate(task_list) if i not in task_list[n + 1:]]
     return sorted(task_list, key=lambda i: i['TRIGGER DATE'])
 
 
-def run_notification_service():
+def run_notification_service(task_list):
     # Run the notification service
     while True:
         # Check if there is anything to notify
         print('Checking for any notifications')
-        if check_notifications():
-            print('Notfying user')
-        else:
-            print('Nothing to notify at this time, taking a break of {} hours'.format(BREAK_TIME_HRS))
+        task_list_updated = []
+        for task in task_list:
+            task_updated = task
+            if trigger_notification(task):
+                print('Notfying user about {} - {}'.format(task["NAME"], task["TYPE"]))
+                task_updated["STATUS"] = "TRIGGERED"
+            task_list_updated.append(task_updated)
+        task_list = task_list_updated
+
+        for task in task_list:
+            print(task)
+        print('Taking a break of {} hours'.format(BREAK_TIME_HRS))
 
         sleep(BREAK_TIME_HRS * 60 * 60)
 
 
 if __name__ == '__main__':
     # Load task profile
-    print('Loading task profile')
+    print('\nLoading task profile')
     task_profile = get_task_profile()
 
     # Get task parameters from user
-    print('Collecting task parameters from user')
+    print('\nCollecting task parameters from user')
     task_parameters = get_task_parameters(task_profile)
 
     # Create task list
-    print('Creating the task list')
+    print('\nCreating the task list')
     task_list = create_task_list(task_parameters)
+    for task in task_list:
+        print(task)
 
     # Run Notification Service
-    print('Running Notification Service')
+    print('\nRunning Notification Service')
+    run_notification_service(task_list)

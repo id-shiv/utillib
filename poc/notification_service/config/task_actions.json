@@ -4,15 +4,111 @@
             "NAME": "PPE CRITERIA",
             "NOTIFY": "2_WEEKS_BEFORE",
             "REMINDER": "EVERY_WEEK",
-            "KNOWLEDGE BASE": "PPE_Checklist.txt",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
             "PROFILE PARAMTER": "PPE DATE"
         },
         {
             "NAME": "TEST ENTRY CRITERIA",
             "NOTIFY": "2_WEEKS_BEFORE",
             "REMINDER": "EVERY_WEEK",
-            "KNOWLEDGE BASE": "PPE_Checklist.txt",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
             "PROFILE PARAMTER": "TEST ENTRY"
+        },
+        {
+            "NAME": "FEATURE COMPLETE CRITERIA",
+            "NOTIFY": "2_WEEKS_BEFORE",
+            "REMINDER": "EVERY_WEEK",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "FEATURE COMPLETE"
+        },
+        {
+            "NAME": "CODE FREEZE CRITERIA",
+            "NOTIFY": "1_WEEK_BEFORE",
+            "REMINDER": "",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "CODE FREEZE"
+        },
+        {
+            "NAME": "HARDENING ENTRY CRITERIA",
+            "NOTIFY": "2_WEEKS_BEFORE",
+            "REMINDER": "EVERY_WEEK",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "HARDENING ENTRY"
+        },
+        {
+            "NAME": "HARDENING EXIT CRITERIA",
+            "NOTIFY": "1_WEEK_BEFORE",
+            "REMINDER": "",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "HARDENING EXIT"
+        },
+        {
+            "NAME": "FINAL VALIDATION ENTRY CRITERIA",
+            "NOTIFY": "2_WEEKS_BEFORE",
+            "REMINDER": "EVERY_WEEK",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "FINAL VALIDATION ENTRY"
+        },
+        {
+            "NAME": "FINAL VALIDATION EXIT CRITERIA",
+            "NOTIFY": "1_WEEK_BEFORE",
+            "REMINDER": "",
+            "KNOWLEDGE BASE": [{
+                "TYPE": "FILE",
+                "KNOWLEDGE": "PPE_Checklist.txt"
+            }
+            ],
+            "PROFILE PARAMTER": "FINAL VALIDATION EXIT"
+        },
+        {
+            "NAME": "RELEASE EXIT CRITERIA",
+            "NOTIFY": "1_WEEK_BEFORE",
+            "REMINDER": "",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "RFD"
+        },
+        {
+            "NAME": "A-REV CHECLIST",
+            "NOTIFY": "1_WEEK_BEFORE",
+            "REMINDER": "",
+            "KNOWLEDGE BASE": [{                 
+                "TYPE": "FILE",                 
+                "KNOWLEDGE": "PPE_Checklist.txt"             
+                }             
+            ],
+            "PROFILE PARAMTER": "RTW"
         }
     ]
 }

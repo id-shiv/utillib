@@ -1,0 +1,108 @@
+{
+    "PROFILE" : [
+        {
+            "PARAMETER" : "PROJECT NAME",
+            "QUESTION": "Enter name of the project?",
+            "MANDATORY": "True",
+            "TYPE": "STRING",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "PROJECT MODEL",
+            "QUESTION": "Enter the project model (Agile, Waterfall, Hybrid?",
+            "MANDATORY": "True",
+            "TYPE": "PROJECT MODEL",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "PPE DATE",
+            "QUESTION": "Enter Plan Phase Exit date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "TEST ENTRY",
+            "QUESTION": "Enter Test entry date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "FEATURE COMPLETE",
+            "QUESTION": "Enter Feature Complete date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "CODE FREEZE",
+            "QUESTION": "Enter Code Freeze date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "HARDENING ENTRY",
+            "QUESTION": "Enter PT Hardening entry date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : [
+                {
+                    "TYPE" : "PROJECT MODEL",
+                    "VALUE" : "agile"
+                }
+            ]
+        },
+        {
+            "PARAMETER" : "FINAL VALIDATION ENTRY",
+            "QUESTION": "Enter Final Validation entry date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : [
+                {
+                    "TYPE" : "PROJECT MODEL",
+                    "VALUE" : "waterfall"
+                }
+            ]
+        },
+        {
+            "PARAMETER" : "HARDENING EXIT",
+            "QUESTION": "Enter PT Hardening exit date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : [
+                {
+                    "TYPE" : "PROJECT MODEL",
+                    "VALUE" : "agile"
+                }
+            ]
+        },
+        {
+            "PARAMETER" : "FINAL VALIDATION EXIT",
+            "QUESTION": "Enter Final Validation exit date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : [
+                {
+                    "TYPE" : "PROJECT MODEL",
+                    "VALUE" : "waterfall"
+                }
+            ]
+        },
+        {
+            "PARAMETER" : "RFD",
+            "QUESTION": "Enter Release From Development(RFD) date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : ""
+        },
+        {
+            "PARAMETER" : "RTW",
+            "QUESTION": "Enter Release To Web(RTW) date?",
+            "MANDATORY": "True",
+            "TYPE": "DATE",
+            "DEPENDENCIES" : ""
+        }
+    ]
+}

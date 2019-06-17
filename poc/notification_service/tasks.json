@@ -1,11 +1,18 @@
 {
     "TASKS": [
         {
-            "DATE": "6-17-2019",
             "NAME": "PPE CRITERIA",
             "NOTIFY": "2_WEEKS_BEFORE",
             "REMINDER": "EVERY_WEEK",
-            "KNOWLEDGE BASE": "PPE_Checklist.txt"
+            "KNOWLEDGE BASE": "PPE_Checklist.txt",
+            "PROFILE PARAMTER": "PPE DATE"
+        },
+        {
+            "NAME": "TEST ENTRY CRITERIA",
+            "NOTIFY": "2_WEEKS_BEFORE",
+            "REMINDER": "EVERY_WEEK",
+            "KNOWLEDGE BASE": "PPE_Checklist.txt",
+            "PROFILE PARAMTER": "TEST ENTRY"
         }
     ]
 }

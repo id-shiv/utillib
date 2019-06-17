@@ -9,6 +9,8 @@ import re
 
 ROOT_FOLDER = '/Users/shiv/Desktop/utillib/poc/notification_service/'
 BREAK_TIME_HRS = 24
+TASK_PROFILE_FILE = 'config/task_profile.json'
+TASK_ACTIONSFILE = 'config/task_actions.json'
 
 
 class General_Modules:
@@ -27,11 +29,6 @@ class General_Modules:
     def validate_project_model(input_model):
         return (input_model.lower() in ["agile", "waterfall", "hybrid"])
 
-    def get_project_model(task_profile):
-        for task in task_profile["PROFILE"]:
-            if task["PARAMETER"] == "PROJECT MODEL":
-                return task["RESPONSE"]
-
     def pad_date_with_zero(input_date, delimiter='-'):
         output_date = []
         for date_paramter in input_date.split(delimiter):
@@ -41,11 +38,15 @@ class General_Modules:
                 output_date.append(date_paramter)
         return delimiter.join(output_date)
 
+    def load_json(file_path):
+        with open(file_path, 'r') as _file:
+            return json.load(_file)
 
-def get_tasks():
-    with open(ROOT_FOLDER + 'tasks.json', 'r') as task_file:
-        tasks = json.load(task_file)
-    return tasks["TASKS"]
+
+def get_project_model(task_profile):
+    for task in task_profile:
+        if task["PARAMETER"] == "PROJECT MODEL":
+            return task["RESPONSE"]
 
 
 def check_notifications():
@@ -58,95 +59,120 @@ def notify():
     pass
 
 
-# Collect task profile
-with open(ROOT_FOLDER + 'task_profile.json', 'r') as task_profile_file:
-    tasks = json.load(task_profile_file)
+def get_task_actions():
+    return General_Modules.load_json(ROOT_FOLDER + TASK_ACTIONSFILE)["TASK ACTIONS"]
 
-tasks_updated_profile_list = []
-# Collect the task parameters
-for task in tasks["PROFILE"]:
-    # Is this task dependent of any other parameter?
-    skip_task = False  # skip the question does not match dependency
-    if task["DEPENDENCIES"] != "":
-        for dependency in task["DEPENDENCIES"]:
-            if dependency["TYPE"] == "PROJECT MODEL":
-                if dependency["VALUE"].lower() != General_Modules.get_project_model(tasks).lower():
-                    skip_task = True
 
-    if skip_task:
-        continue
+def get_task_profile():
+    return General_Modules.load_json(ROOT_FOLDER + TASK_PROFILE_FILE)["PROFILE"]
 
-    print(task["QUESTION"])
-    response = input('Enter: ')
 
-    # Validate if mandatory
-    while task["MANDATORY"] == "True" and response.strip() == "":
-        print('This is a Mandatory Attribute')
+def get_task_parameters(task_profile):
+    tasks_updated_profile_list = []
+    # Collect the task parameters
+    for task in task_profile:
+        # Is this task dependent of any other parameter?
+        skip_task = False  # skip the question does not match dependency
+        if task["DEPENDENCIES"] != "":
+            for dependency in task["DEPENDENCIES"]:
+                if dependency["TYPE"] == "PROJECT MODEL":
+                    if dependency["VALUE"].lower() != get_project_model(task_profile).lower():
+                        skip_task = True
+
+        if skip_task:
+            continue
+
+        print(task["QUESTION"])
         response = input('Enter: ')
 
-    # Validate date format
-    if task["TYPE"] == "DATE":
-        while not General_Modules.validate_date(response):
-            print('Enter Date in YYYY-MM-DD format')
+        # Validate if mandatory
+        while task["MANDATORY"] == "True" and response.strip() == "":
+            print('This is a Mandatory Attribute')
             response = input('Enter: ')
 
-    # Validate if string
-    if task["TYPE"] == "STRING":
-        while not General_Modules.validate_string(response):
-            print('Enter String')
-            response = input('Enter: ')
+        # Validate date format
+        if task["TYPE"] == "DATE":
+            while not General_Modules.validate_date(response):
+                print('Enter Date in YYYY-MM-DD format')
+                response = input('Enter: ')
 
-    # Validate if project model
-    if task["TYPE"] == "PROJECT MODEL":
-        while not General_Modules.validate_project_model(response):
-            print('Enter Project Model as Agile/Waterfall/Hybrid')
-            response = input('Enter: ')
-    
-    task["RESPONSE"] = response
-    tasks_updated_profile_list.append(task)
-    print("-"*50 + "\n")
+        # Validate if string
+        if task["TYPE"] == "STRING":
+            while not General_Modules.validate_string(response):
+                print('Enter String')
+                response = input('Enter: ')
 
-# Build task list
-task_list = []
-tasks = get_tasks()
+        # Validate if project model
+        if task["TYPE"] == "PROJECT MODEL":
+            while not General_Modules.validate_project_model(response):
+                print('Enter Project Model as Agile/Waterfall/Hybrid')
+                response = input('Enter: ')
 
-for task in tasks:
-    task_details = {}
-    task_details["NAME"] = task["NAME"]
-    task_details["TYPE"] = "TRIGGER"
-    for tasks_updated_profile in tasks_updated_profile_list:
-        if tasks_updated_profile["PARAMETER"] == task["PROFILE PARAMTER"]:
-            task_details["TASK DATE"] = General_Modules.pad_date_with_zero(tasks_updated_profile["RESPONSE"])
-    if task["NOTIFY"] == "2_WEEKS_BEFORE":
-        date_2_weeks_before = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d') - timedelta(days=14)
-        task_details["TRIGGER DATE"] = General_Modules.pad_date_with_zero(str(date_2_weeks_before).split(" ")[0])
-    if task["REMINDER"]:
-        if task["REMINDER"] == 'EVERY_WEEK':
-            reminder_date = datetime.strptime(task_details["TRIGGER DATE"], '%Y-%m-%d')
-            task_date = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d')
-            while reminder_date < task_date:
-                reminder_date = reminder_date + timedelta(days=7)
-                sub_task_details = {}
-                sub_task_details["NAME"] = task["NAME"]
-                sub_task_details["TYPE"] = "REMINDER"
-                sub_task_details["TASK DATE"] = task_details["TASK DATE"]
-                sub_task_details["TRIGGER DATE"] = str(reminder_date).split(" ")[0]
-                task_list.append(sub_task_details)
-
-    task_list.append(task_details)
-    
-task_list = [i for n, i in enumerate(task_list) if i not in task_list[n + 1:]]
-for task in sorted(task_list, key=lambda i: i['TRIGGER DATE']):
-    print('{}|{}|{}|{}'.format(task["NAME"], task["TYPE"], task["TASK DATE"], task["TRIGGER DATE"]))
+        task["RESPONSE"] = response
+        tasks_updated_profile_list.append(task)
+        print("-"*50 + "\n")
+    return tasks_updated_profile_list
 
 
-# Run the notification service
-while False:
-    # Check if there is anything to notify
-    print('Checking for any notifications')
-    if check_notifications():
-        print('Notfying user')
-    else:
-        print('Nothing to notify at this time, taking a break of {} hours'.format(BREAK_TIME_HRS))
+def create_task_list(task_parameters):
+    # Build task list
+    task_list = []
+    tasks = get_task_actions()
 
-    sleep(BREAK_TIME_HRS * 60 * 60)
+    for task in tasks:
+        task_details = {}
+        task_details["NAME"] = task["NAME"]
+        task_details["TYPE"] = "TRIGGER"
+        for tasks_updated_profile in task_parameters:
+            if tasks_updated_profile["PARAMETER"] == task["PROFILE PARAMTER"]:
+                task_details["TASK DATE"] = General_Modules.pad_date_with_zero(tasks_updated_profile["RESPONSE"])
+        if task["NOTIFY"] == "2_WEEKS_BEFORE":
+            date_2_weeks_before = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d') - timedelta(days=14)
+            task_details["TRIGGER DATE"] = General_Modules.pad_date_with_zero(str(date_2_weeks_before).split(" ")[0])
+        if task["REMINDER"]:
+            if task["REMINDER"] == 'EVERY_WEEK':
+                reminder_date = datetime.strptime(task_details["TRIGGER DATE"], '%Y-%m-%d')
+                task_date = datetime.strptime(task_details["TASK DATE"], '%Y-%m-%d')
+                while reminder_date < task_date:
+                    reminder_date = reminder_date + timedelta(days=7)
+                    sub_task_details = {}
+                    sub_task_details["NAME"] = task["NAME"]
+                    sub_task_details["TYPE"] = "REMINDER"
+                    sub_task_details["TASK DATE"] = task_details["TASK DATE"]
+                    sub_task_details["TRIGGER DATE"] = str(reminder_date).split(" ")[0]
+                    task_list.append(sub_task_details)
+
+        task_list.append(task_details)
+
+    task_list = [i for n, i in enumerate(task_list) if i not in task_list[n + 1:]]
+    return sorted(task_list, key=lambda i: i['TRIGGER DATE'])
+
+
+def run_notification_service():
+    # Run the notification service
+    while True:
+        # Check if there is anything to notify
+        print('Checking for any notifications')
+        if check_notifications():
+            print('Notfying user')
+        else:
+            print('Nothing to notify at this time, taking a break of {} hours'.format(BREAK_TIME_HRS))
+
+        sleep(BREAK_TIME_HRS * 60 * 60)
+
+
+if __name__ == '__main__':
+    # Load task profile
+    print('Loading task profile')
+    task_profile = get_task_profile()
+
+    # Get task parameters from user
+    print('Collecting task parameters from user')
+    task_parameters = get_task_parameters(task_profile)
+
+    # Create task list
+    print('Creating the task list')
+    task_list = create_task_list(task_parameters)
+
+    # Run Notification Service
+    print('Running Notification Service')

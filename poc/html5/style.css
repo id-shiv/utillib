@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+article, aside, footer, header, main, nav, section {
+    display: block;
+}
+
+*{
+    margin: 0; padding:0; box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: blueviolet;
+}
+
+.banner {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: teal;
+    color: white;
+}
+
+.site-logo{
+    width: 50%;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.menu {
+    width: 50%;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+.menu ul li {
+    display: inline;
+    margin-left: 140px;
+}
+
+main {
+    background-color: aquamarine;
+    width: 80%;
+    height: 400px;
+    float: left;
+}
+
+aside {
+    width: 20%;
+    height: 200px;
+    float: right;
+}
+
+.notifications {
+    background-color: bisque;
+}
+
+.ads {
+    background-color: blue;
+}
+
+footer {
+    clear: both;
+    width: 100%;
+    height: 50px;
+    background-color: teal;
+    color: white;
+    padding-top: 15px;
+}

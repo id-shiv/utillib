@@ -10,14 +10,15 @@ article, aside, footer, header, main, nav, section {
 }
 
 body {
-    background-color: blueviolet;
+    /* background-color: rgb(43, 41, 44); */
+    background-color: black;
 }
 
 .banner {
     display: flex;
     width: 100%;
     height: 50px;
-    background-color: teal;
+    background-color: rgb(42, 37, 37);
     color: white;
 }
 
@@ -28,42 +29,91 @@ body {
 }
 
 .menu {
-    width: 50%;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(22, 20, 20);
+    color: white;
     padding-top: 15px;
-    padding-left: 10px;
+    padding-left: 50%;
 }
 
 .menu ul li {
     display: inline;
-    margin-left: 140px;
+    padding-left: 120px;
 }
 
 main {
-    background-color: aquamarine;
-    width: 80%;
-    height: 400px;
-    float: left;
+    background-color: rgb(158, 148, 148);
+    width: 100%;
+    height: auto;
+    /* min-height: 600px; */
+    /* float: left; */
+    color: white;
+}
+
+.menu-panel {
+    display: flex;
+}
+
+.menu-panel-box1 {
+    width: 24%;
+    height: 200px;
+    background-color: rgb(20, 20, 20);
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    text-align: center;
+}
+
+.menu-panel-box2 {
+    width: 24%;
+    height: 200px;
+    background-color: rgb(30, 30, 30);
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.menu-panel-box3 {
+    width: 24%;
+    height: 200px;
+    background-color: rgb(40, 40, 40);
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.menu-panel-box4 {
+    width: 24%;
+    height: 200px;
+    background-color: rgb(50, 50, 50);
+    margin-right: 1%;
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.image-dc {
+    width: 100%;
+    height: 300px;
+    background-image: url("images/home_image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
 }
 
 aside {
-    width: 20%;
-    height: 200px;
-    float: right;
-}
-
-.notifications {
-    background-color: bisque;
-}
-
-.ads {
-    background-color: blue;
+    width: 40%;
+    height: auto;
+    /* float: right; */
 }
 
 footer {
     clear: both;
     width: 100%;
     height: 50px;
-    background-color: teal;
+    background-color: rgb(42, 37, 37);
     color: white;
     padding-top: 15px;
 }

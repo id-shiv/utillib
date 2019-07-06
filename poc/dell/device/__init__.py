@@ -4,7 +4,9 @@ import pandas as pd
 import numpy as np
 
 SERVICE_TAG = "FK00BP2"
-EXPORT_TO_CSV = "poc/dell/exported/"
+EXPORT_TO_FOLDER = "poc/dell/exported/"
+EXPORT_FILE_NAME = '{}.csv'.format(SERVICE_TAG)
+EXPORT_PATH = EXPORT_TO_FOLDER + EXPORT_FILE_NAME
 
 
 def __soup(url):
@@ -24,7 +26,7 @@ def __insert(df, row):
     return df
 
 
-def original_configuration(service_tag):
+def __original_configuration(service_tag):
     URL = "https://www.dell.com/support/home/in/en/indhs1/product-support/servicetag/<SERVICE TAG>/configuration"
     URL = URL.replace("<SERVICE TAG>", service_tag)
     columns = ["COMPONENT NAME", "PART NUMBER", "QUANTITY", "DESCRIPTION"]
@@ -36,7 +38,11 @@ def original_configuration(service_tag):
         "table": "table table-striped"
     }
 
-    soup = __soup(URL)
+    try:
+        soup = __soup(URL)
+    except BaseException as e:
+        print(e)
+        return
     content = soup.find("div", {"class": locators["content"]})
     components = content.findChildren("div", recursive=False)
 
@@ -59,5 +65,13 @@ def original_configuration(service_tag):
     return config_details
 
 
-config_details = original_configuration(SERVICE_TAG)
-config_details.to_csv('{}{}.csv'.format(EXPORT_TO_CSV, SERVICE_TAG))
+def original_configuration(service_tag):
+    config_details = __original_configuration(SERVICE_TAG)
+    if config_details is not None:
+        config_details.to_csv(EXPORT_PATH)
+    else:
+        print('Original configuration of the device {} could not be retrived'.format(SERVICE_TAG))
+        print('Check internet connectivity to www.dell.com')
+
+
+original_configuration(SERVICE_TAG)

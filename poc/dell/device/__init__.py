@@ -7,7 +7,9 @@ SERVICE_TAG = "FK00BP2"
 EXPORT_TO_FOLDER = "poc/dell/exported/"
 EXPORT_FILE_NAME = '{}.csv'.format(SERVICE_TAG)
 EXPORT_PATH = EXPORT_TO_FOLDER + EXPORT_FILE_NAME
-
+URL = "https://www.dell.com/support/home/in/en/indhs1/product-support/servicetag/<SERVICE TAG>/configuration"
+URL = URL.replace("<SERVICE TAG>", SERVICE_TAG)
+    
 
 def __soup(url):
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"}
@@ -26,9 +28,7 @@ def __insert(df, row):
     return df
 
 
-def __original_configuration(service_tag):
-    URL = "https://www.dell.com/support/home/in/en/indhs1/product-support/servicetag/<SERVICE TAG>/configuration"
-    URL = URL.replace("<SERVICE TAG>", service_tag)
+def __original_configuration(service_tag, url):
     columns = ["COMPONENT NAME", "PART NUMBER", "QUANTITY", "DESCRIPTION"]
     config_details = pd.DataFrame(columns=columns)
 
@@ -39,7 +39,7 @@ def __original_configuration(service_tag):
     }
 
     try:
-        soup = __soup(URL)
+        soup = __soup(url)
     except BaseException as e:
         print(e)
         return
@@ -66,7 +66,7 @@ def __original_configuration(service_tag):
 
 
 def original_configuration(service_tag):
-    config_details = __original_configuration(SERVICE_TAG)
+    config_details = __original_configuration(SERVICE_TAG, URL)
     if config_details is not None:
         config_details.to_csv(EXPORT_PATH)
     else:

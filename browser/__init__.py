@@ -99,6 +99,14 @@ def get_hyper_links(url):
     return hyper_links
 
 
+def unshorten_url(url):
+    import requests
+
+    session = requests.Session()  # so connections are recycled
+    resp = session.head(url, allow_redirects=True)
+    return resp.url
+
+
 def screen_shot(browser_driver, output_file):
     """
     Saves screen shot of current browser state with specified output file name

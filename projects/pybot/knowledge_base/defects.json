@@ -1,0 +1,22 @@
+{
+    "open_defect": {
+        "utterances" : [
+            "open defect"
+        ],
+        "responses": [
+            "sure, let me find the defect to open",
+            "ok, let me find the defect for you",
+            "open defect : alright, let me dot thet"
+        ]
+    },
+    "search_defect": {
+        "utterances" : [
+            "search defect"
+        ],
+        "responses": [
+            "sure, let me find the defect to open",
+            "ok, let me find the defect for you",
+            "open defect : alright, let me dot thet"
+        ]
+    }
+}

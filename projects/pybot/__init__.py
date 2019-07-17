@@ -1,7 +1,7 @@
-from actions import load, predict
+from actions import Bot
 
 client_user_name = 'Shiv'
-bot_name = 'HOUDINI'
+bot_name = '@PyBot'
 
 
 def __get_user_input():
@@ -39,7 +39,8 @@ def get_response_message(request_message):
 
 
 if __name__ == '__main__':
-    intents, X, classifier = load()
+    bot = Bot()
+    classifier = bot.load()
 
     # Inside a session
     while(True):
@@ -47,10 +48,9 @@ if __name__ == '__main__':
         request_message = get_request_message()
 
         # Get the response for the requested message
-        response = predict(request_message, intents, X, classifier)
+        response = bot.predict(request_message, classifier)
         __display_response(response)
 
         # Look for the word 'quit' to end the client
         if request_message.lower() == 'quit':
             __display_response('Ok, bye!')
-

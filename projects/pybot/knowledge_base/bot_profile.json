@@ -1,0 +1,77 @@
+{
+    "greet": {
+        "utterances" : [
+            "hi",
+            "hello",
+            "hey",
+            "good day morning",
+            "howdy",
+            "wats up",
+            "what is up",
+            "dude",
+            "yo"
+        ],
+        "responses": [
+            "hello",
+            "hi",
+            "hey there!",
+            "hi, how can i help!"
+        ]
+
+    },
+    "offer_help": {
+        "utterances" : [
+            "need help",
+            "help me with",
+            "do you know",
+            "do you have",
+            "could you get",
+            "share me",
+            "do this"
+        ],
+        "responses": [
+            "tell me", 
+            "what is the query?",
+            "how can i help!"
+        ]
+    },
+    "my_name": {
+        "utterances" : [
+            "what is your name",
+            "do you have a name",
+            "what are you known as",
+            "do you have an identity"
+        ],
+        "responses": [
+            "i am HOUDINI", 
+            "my name is HOUDINI",
+            "well i am HOUDINI"
+        ]
+    },
+    "my_age": {
+        "utterances" : [
+            "what is your age",
+            "do you know your age",
+            "how old are you",
+            "when were you born"
+        ],
+        "responses": [
+            "i was born on 17th July 2019", 
+            "i am young :)",
+            "long back, but definetly after you were"
+        ]
+    },
+    "my_birth_place": {
+        "utterances" : [
+            "where were you born",
+            "where are you from",
+            "your birth place",
+            "are you from"
+        ],
+        "responses": [
+            "i am from the planet R740xd named STRS2F2S", 
+            "here is a puzzle, you dont have access to that place",
+            "you figure out, somewhere in 5th floor"
+        ]
+    }
+}

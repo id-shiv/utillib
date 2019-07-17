@@ -1,0 +1,29 @@
+{
+    "get_st_original_config": {
+        "utterances" : [
+            "get me the original configuration of device",
+            "what is the original configuration of server",
+            "factory configuration of hardware",
+            "original factory setting of the service tag"
+        ],
+        "responses": [
+            "sure, let me get that for you",
+            "ok, plese wait while i fetch the original configuration",
+            "give me sometime, i will get the required information"
+        ]
+    },
+    "get_st_current_config": {
+        "utterances" : [
+            "get me the current configuration of device",
+            "what is the configuration of server service tag",
+            "now configuration",
+            "current setting of the service tag hardware",
+            "latest config"
+        ],
+        "responses": [
+            "sure, let me get that for you",
+            "ok, plese wait while i fetch the latest configuration",
+            "give me sometime, i will get the required information"
+        ]
+    }
+}

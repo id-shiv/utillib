@@ -33,14 +33,9 @@ def __display_response(response_message):
     print("\n")
 
 
-def get_response_message(request_message):
-    response_message = request_message
-    return __display_response(response_message)
-
-
 if __name__ == '__main__':
     bot = Bot()
-    classifier = bot.load()
+    bot.load()
 
     # Inside a session
     while(True):
@@ -48,7 +43,7 @@ if __name__ == '__main__':
         request_message = get_request_message()
 
         # Get the response for the requested message
-        response = bot.predict(request_message, classifier)
+        response = bot.respond(request_message)
         __display_response(response)
 
         # Look for the word 'quit' to end the client

@@ -1,22 +1,51 @@
 {
-    "open_defect": {
-        "utterances" : [
-            "open defect"
-        ],
-        "responses": [
-            "sure, let me find the defect to open",
-            "ok, let me find the defect for you",
-            "open defect : alright, let me dot thet"
-        ]
-    },
     "search_defect": {
         "utterances" : [
-            "search defect"
+            "search defect",
+            "open defect",
+            "get me this the defect"
         ],
         "responses": [
-            "sure, let me find the defect to open",
-            "ok, let me find the defect for you",
-            "open defect : alright, let me dot thet"
-        ]
+            "found this ...",
+            "below link to the defect might help",
+            "here we go,",
+            "check this link"
+        ],
+        "slots": [
+            {
+                "identifier" : "id",
+                "mandatory": "True",
+                "responses": [
+                    "what is the defect id?"
+                ]
+            },
+            {
+                "identifier" : "project",
+                "mandatory": "True",
+                "responses": [
+                    "what is the jira project?"
+                ]
+            },
+            {
+                "identifier" : "component",
+                "mandatory": "True",
+                "responses": [
+                    "what is the defect project component?"
+                ]
+            },
+            {
+                "identifier" : "release",
+                "mandatory": "False",
+                "responses": [
+                    "any release or a specific release?",
+                    "for which release?"
+                ]
+            }
+        ],
+        "action":{
+            "source": "browser",
+            "task": "launch",
+            "value": "https://google.com/<id>"
+        }
     }
 }

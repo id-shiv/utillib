@@ -7,9 +7,10 @@ SERVICE_TAG = "FK00BP2"
 EXPORT_TO_FOLDER = "poc/dell/exported/"
 EXPORT_FILE_NAME = '{}.csv'.format(SERVICE_TAG)
 EXPORT_PATH = EXPORT_TO_FOLDER + EXPORT_FILE_NAME
-URL = "https://www.dell.com/support/home/in/en/indhs1/product-support/servicetag/<SERVICE TAG>/configuration"
+URL = "https://www.dell.com/support/home/in/en/indhs1/product-support/servicetag/FK00BP2/configuration"
+URL = "https://www.dell.com/support/home/in/en/indhs1/product-support/servicetag/fk00bp2/upgrade#"
 URL = URL.replace("<SERVICE TAG>", SERVICE_TAG)
-    
+
 
 def __soup(url):
     headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"}
@@ -43,8 +44,13 @@ def __original_configuration(service_tag, url):
     except BaseException as e:
         print(e)
         return
-    content = soup.find("div", {"class": locators["content"]})
-    components = content.findChildren("div", recursive=False)
+    
+    try:
+        content = soup.find("div", {"class": locators["content"]})
+        components = content.findChildren("div", recursive=False)
+    except BaseException as e:
+        print(e)
+        return
 
     for component in components:
         config_info = []

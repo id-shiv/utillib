@@ -119,10 +119,10 @@ class Bot:
 
     def respond(self, request):
         # Process request
-        #print('\n')
-        #print('Request Processing')
-        #print(self.current_context)
-        #print(self.intent)
+        print('\n')
+        print('Request Processing')
+        print(self.current_context)
+        print(self.intent)
 
         for _intent_index, _intent in enumerate(self.conversation_context):
             if (_intent['main_intent'] == self.current_context) and (_intent['sub_intent'] == self.intent):
@@ -142,16 +142,17 @@ class Bot:
                             self.conversation_context[_intent_index]['slots'][_slot_index] = modified_slot
 
                             break
-        
-        if not self.request_to_previous_context:
-            self.predict(request)
 
-        # Process response
-        #print('\n')
-        #print('Response Processing')
-        #print(self.current_context)
-        #print(self.intent)
+        if not self.request_to_previous_context:
+            # Process response
+            print('\n')
+            print('Response Processing')
+            print(self.current_context)
+            print(self.intent)
+            self.predict(request)
+        print(self.response)
         response = self.response
+
 
         for _intent_index, _intent in enumerate(self.conversation_context):
             if (_intent['main_intent'] == self.current_context) and (_intent['sub_intent'] == self.intent):
@@ -193,11 +194,11 @@ class Bot:
                                     replace_with = _slot['value']
                             response = response + '\n' + _intent['action']['value'].replace('<' + to_replace + '>', replace_with)
 
-                    for _slot_index, _slot in enumerate(_intent['slots']):
-                        modified_slot = _slot
-                        modified_slot['current_status'] = None
-                        modified_slot['value'] = None
-                        self.conversation_context[_intent_index]['slots'][_slot_index] = modified_slot
+                    # for _slot_index, _slot in enumerate(_intent['slots']):
+                    #     modified_slot = _slot
+                    #     modified_slot['current_status'] = None
+                    #     modified_slot['value'] = None
+                    #     self.conversation_context[_intent_index]['slots'][_slot_index] = modified_slot
             self.current_context = None
             self.intent = None
             self.request_to_previous_context = False

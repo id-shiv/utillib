@@ -1,0 +1,99 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    align-items: center;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 30%;
+    background-color: slategrey;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.site-logo{
+    color: azure;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.nav-links{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.nav-links li{
+    list-style: none;
+}
+
+.nav-links a{
+    color: azure;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tripple-line {
+    display: none;
+}
+
+.tripple-line div{
+    width: 25px;
+    height: 2px;
+    background-color: azure;
+    margin: 5px;
+}
+
+.form{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+    width: 50%;
+    position: relative;
+    height: 60px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 10%;
+}
+
+.form input{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: black;
+    padding-top: 30px;
+    border: none;
+}
+
+.form label{
+    position: absolute;
+    bottom: 0px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid black;
+}
+
+.form label::after{
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    border-bottom: 2px solid orange;
+}
